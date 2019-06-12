@@ -166,11 +166,7 @@ toEdit(record){
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.product}>
-<<<<<<< HEAD
-        <div className={styles.title}>商品管理</div>
-=======
         <div className={styles.title}>产品管理</div>
->>>>>>> 0d4b298e84b3af92aa80a144ffde198a7335f28d
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
