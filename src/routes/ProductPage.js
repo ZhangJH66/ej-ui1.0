@@ -5,6 +5,7 @@ import styles from './ProductPage.css'
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
 
+
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
 class ProductPage extends React.Component {
   // 局部状态state
