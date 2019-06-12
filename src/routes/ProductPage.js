@@ -120,7 +120,7 @@ class ProductPage extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.product}>
-        <div className={styles.title}>顾客管理</div>
+        <div className={styles.title}>产品管理</div>
         <div className={styles.btns}>
           <Button>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
