@@ -24,7 +24,7 @@ class CommentForm extends React.Component {
             <Form.Item label="评论时间">
               {getFieldDecorator('comment_time', {
                 rules: [{ required: true, message: '请输入评论时间!' }],
-              })(<Input />)}npms
+              })(<Input />)}
             </Form.Item>
             
            
