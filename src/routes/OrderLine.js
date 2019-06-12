@@ -114,8 +114,7 @@ class OrderLine extends React.Component {
       <div className={styles.comment}>
         <div className={styles.title}>订单管理</div>
         <div className={styles.btns}>
-          <Button>审核</Button> &nbsp;
-          <Button>派单</Button> &nbsp;
+          <Button>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
           <Button type="link">导出</Button>
         </div>
