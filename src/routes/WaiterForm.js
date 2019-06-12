@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input,Radio} from 'antd'
 
+
 class CustomerForm extends React.Component {
 
   render(){
@@ -21,6 +22,7 @@ class CustomerForm extends React.Component {
     getFieldDecorator("id");
     getFieldDecorator("status");
     getFieldDecorator("photo");
+    getFieldDecorator("idcard");
     return (
       <Modal
           visible={visible}
