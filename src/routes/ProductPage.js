@@ -5,6 +5,7 @@ import styles from './ProductPage.css'
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
 
+
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
 class ProductPage extends React.Component {
   // 局部状态state
@@ -120,7 +121,7 @@ class ProductPage extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.product}>
-        <div className={styles.title}>顾客管理</div>
+        <div className={styles.title}>产品管理</div>
         <div className={styles.btns}>
           <Button>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
