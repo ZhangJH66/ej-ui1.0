@@ -123,10 +123,7 @@ class Order extends React.Component {
       <div className={styles.comment}>
         <div className={styles.title}>订单显示</div>
         <div className={styles.btns}>
-          <Button>全部订单</Button> &nbsp;
-          <Button>待付款</Button> &nbsp;
-          <Button>待服务</Button> &nbsp;
-          <Button>待评价</Button> &nbsp;
+          <Button>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
           <Button type="link">导出</Button>
         </div>

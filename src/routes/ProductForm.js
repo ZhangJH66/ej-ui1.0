@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input,Radio} from 'antd'
 
-class CustomerForm extends React.Component {
+class ProductForm extends React.Component {
 
   render(){
     const formLayout = {
@@ -20,30 +20,31 @@ class CustomerForm extends React.Component {
     // 将表单中没有出现的值做一个双向数据绑定
     getFieldDecorator("id");
     getFieldDecorator("status");
-    getFieldDecorator("photo");
+    getFieldDecorator("phtot");
+    getFieldDecorator("category_id");
     return (
       <Modal
           visible={visible}
-          title="添加顾客信息"
+          title="添加商品"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
         >
           <Form layout="vertical" {...formLayout}>
-            <Form.Item label="姓名" >
-              {getFieldDecorator('realname', {
-                rules: [{ required: true, message: '请输入姓名!' }],
+            <Form.Item label="商品名称" >
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: '请输入商品名称!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="手机号" >
-              {getFieldDecorator('telephone', {
-                rules: [{ required: true, message: '请输入手机号!' }],
+            <Form.Item label="商品描述" >
+              {getFieldDecorator('description', {
+                rules: [{ required: true, message: '请输入商品描述!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="密码">
-              {getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码!' }],
-              })(<Input.Password />)}
+            <Form.Item label="商品价格">
+              {getFieldDecorator('price', {
+                rules: [{ required: true, message: '请输入商品价格!' }],
+              })(<Input />)}
             </Form.Item>
            
           </Form>
@@ -63,4 +64,4 @@ const mapPropsToFields = (props)=>{
 
 export default Form.create({
   mapPropsToFields
-})(CustomerForm);
+})(ProductForm);
