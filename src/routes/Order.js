@@ -74,15 +74,9 @@ class Order extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'订单号',
-      dataIndex:'id'
-    },{
-      title:'订单时间',
-      dataIndex:'order_time'
-    },{
-        title:'总量',
+      title:'总量',
         dataIndex:'total'
-      },{
+    },{
         title:'顾客号',
         dataIndex:'customer_id'
       },{
@@ -92,6 +86,9 @@ class Order extends React.Component {
     },{
         title:'地址号',
         dataIndex:'address_id'
+      },{
+        title:'订单时间',
+        dataIndex:'order_time'
       },{
       title:'操作',
       width:120,

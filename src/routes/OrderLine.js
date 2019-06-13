@@ -74,19 +74,15 @@ class OrderLine extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'订单号',
-      dataIndex:'id'
-    },{
-      title:'订单数量',
-      dataIndex:'number'
-    },{
-    },{
         title:'订单号',
         dataIndex:'order_id'
       },{
       title:'产品号',
       dataIndex:'product_id'
       },{
+      title:'订单数量',
+      dataIndex:'number'
+    },{
       title:'操作',
       width:120,
       align:"center",
