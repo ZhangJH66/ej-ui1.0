@@ -24,7 +24,7 @@ class Order extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/comment/findAll")
+    axios.get("/order/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -39,7 +39,7 @@ class Order extends React.Component {
       title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
-        axios.post("/comment/batchDelete",{ids:this.state.ids})
+        axios.post("/order/batchDelete",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
@@ -56,7 +56,7 @@ class Order extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         // 删除操作
-        axios.get("/comment/deleteById",{
+        axios.get("/order/deleteById",{
           params:{
             id:id
           }
@@ -120,7 +120,7 @@ class Order extends React.Component {
     
     // 返回结果 jsx(js + xml)
     return (
-      <div className={styles.comment}>
+      <div className={styles.order}>
         <div className={styles.title}>订单显示</div>
         <div className={styles.btns}>
           <Button>添加</Button> &nbsp;

@@ -24,7 +24,7 @@ class OrderLine extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/order/findAll")
+    axios.get("/orderline/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -39,7 +39,7 @@ class OrderLine extends React.Component {
       title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
-        axios.post("/order/batchDelete",{ids:this.state.ids})
+        axios.post("/orderline/batchDelete",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
@@ -56,7 +56,7 @@ class OrderLine extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         // 删除操作
-        axios.get("/order/deleteById",{
+        axios.get("/orderline/deleteById",{
           params:{
             id:id
           }
@@ -111,7 +111,7 @@ class OrderLine extends React.Component {
     
     // 返回结果 jsx(js + xml)
     return (
-      <div className={styles.comment}>
+      <div className={styles.orderline}>
         <div className={styles.title}>订单管理</div>
         <div className={styles.btns}>
           <Button>添加</Button> &nbsp;
