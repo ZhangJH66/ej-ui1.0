@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input} from 'antd'
 
-class CommentForm extends React.Component {
+class CategoryForm extends React.Component {
 
   render(){
     // 父组件传递给子组件值
@@ -10,20 +10,20 @@ class CommentForm extends React.Component {
     return (
       <Modal
           visible={visible}
-          title="添加评论信息"
+          title="添加衣服类别信息"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
         >
           <Form layout="vertical">
-            <Form.Item label="评论内容">
-              {getFieldDecorator('content', {
-                rules: [{ required: true, message: '请输入评论内容!' }],
+            <Form.Item label="衣服类别">
+              {getFieldDecorator('name', {
+                rules: [{ required: true, message: '请输入衣服名称!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="评论时间">
-              {getFieldDecorator('comment_time', {
-                rules: [{ required: true, message: '请输入评论时间!' }],
+            <Form.Item label="衣服数量">
+              {getFieldDecorator('num', {
+                rules: [{ required: true, message: '请输入衣服数量!' }],
               })(<Input />)}
             </Form.Item>
             
@@ -33,4 +33,4 @@ class CommentForm extends React.Component {
     );
   }
 }
-export default Form.create()(CommentForm);
+export default Form.create()(CategoryForm);
