@@ -21,7 +21,7 @@ function RouterConfig({ history }) {
         <Route path="/comment" exact component={CommentPage} />
         <Route path="/product" exact component={ProductPage} />
         <Route path="/waiter" exact component={WaiterPage} />
-        <Route path="/address" exact component={AddressPage} />
+       <Route path="/address" exact component={AddressPage} />
         <Route path="/order" exact component={Order} />
         <Route path="/orderline" exact component={OrderLine} />
       </Switch>
