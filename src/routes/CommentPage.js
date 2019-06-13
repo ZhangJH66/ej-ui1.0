@@ -4,6 +4,7 @@ import styles from './CommentPage.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
+import CommentForm from './CommentForm'
 
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
 class CommentPage extends React.Component {

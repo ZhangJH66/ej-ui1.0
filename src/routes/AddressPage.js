@@ -82,13 +82,13 @@ class AddressPage extends React.Component {
     },{
       title:'地区',
       dataIndex:'area'
-    },{
+    },{      
       title:'地址',
-      dataIndex:'address'
-    },{
-      title:'手机号',
-      dataIndex:'telephone'
-    },{
+    dataIndex:'address'
+  },{
+    title:'手机号',
+    dataIndex:'telephone'
+  },{
       title:'操作',
       width:120,
       align:"center",
