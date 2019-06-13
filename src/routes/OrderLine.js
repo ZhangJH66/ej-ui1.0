@@ -4,6 +4,7 @@ import styles from './OrderLine.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
+import OrderLineForm from './OrderLineForm'
 
 // 组件类必须要继承React.Component，是一个模块，订单管理子功能
 class OrderLine extends React.Component {
