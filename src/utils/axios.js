@@ -5,6 +5,7 @@ import qs from 'qs'
 axios.defaults.baseURL = "http://localhost:8888"
 axios.defaults.headers["Content-Type"]= "application/x-www-form-urlencoded";
 
+   
 
 // 2. 拦截器配置
 axios.interceptors.request.use((config)=>{
