@@ -2,7 +2,7 @@ import axios from 'axios';
 import {message} from 'antd'
 import qs from 'qs'
 // 1. axios的默认配置
-axios.defaults.baseURL = "http://localhost:7777"
+axios.defaults.baseURL = "http://localhost:8888"
 axios.defaults.headers["Content-Type"]= "application/x-www-form-urlencoded";
 
 
