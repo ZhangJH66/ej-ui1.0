@@ -17,17 +17,17 @@ class OrderLineForm extends React.Component {
         >
           <Form layout="vertical">
             <Form.Item label="订单数量">
-              {getFieldDecorator('name', {
+              {getFieldDecorator('number', {
                 rules: [{ required: true, message: '请输入订单数量!' }],
               })(<Input />)}
             </Form.Item>
             <Form.Item label="产品号">
-              {getFieldDecorator('num', {
+              {getFieldDecorator('product_id', {
                 rules: [{ required: true, message: '请输入产品号!' }],
               })(<Input />)}
             </Form.Item>
             <Form.Item label="订单号">
-              {getFieldDecorator('num', {
+              {getFieldDecorator('order_id', {
                 rules: [{ required: true, message: '请输入订单号号!' }],
               })(<Input />)}
             </Form.Item>

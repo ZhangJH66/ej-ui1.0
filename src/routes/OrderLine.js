@@ -14,7 +14,8 @@ class OrderLine extends React.Component {
     this.state = {
       ids:[], // 批量删除的时候保存的id
       list:[],
-      loading:false
+      loading:false,
+      visible:false
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -70,6 +71,44 @@ class OrderLine extends React.Component {
       }
     });
   }
+// 取消按钮的事件处理函数
+handleCancel = () => {
+  this.setState({ visible: false });
+};
+// 确认按钮的事件处理函数
+handleCreate = () => {
+  const form = this.formRef.props.form;
+  form.validateFields((err, values) => {
+    if (err) {
+      return;
+    }
+    // 表单校验完成后与后台通信进行保存
+    axios.post("/orderline/saveOrUpdate",values)
+    .then((result)=>{
+      message.success(result.statusText)
+      // 重置表单
+      form.resetFields();
+      // 关闭模态框
+      this.setState({ visible: false });
+      this.reloadData();
+    })
+    
+  });
+};
+// 将子组件的引用在父组件中进行保存，方便后期调用
+saveFormRef = formRef => {
+  this.formRef = formRef;
+};
+// 去添加
+toAdd(){
+  this.setState({ visible:true})
+}
+// 去更新
+toEdit(record){
+  alert(JSON.stringify(record));
+  // 将record值绑定表单中
+  this.setState({visible:true})
+}
 
   // 组件类务必要重写的方法，表示页面渲染
   render(){
@@ -90,8 +129,8 @@ class OrderLine extends React.Component {
       render:(text,record)=>{
         return (
           <div>
-            <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
-            <Button type='link' size="small">修改</Button>
+             <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
+             <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
           </div>
         )
       }
@@ -114,9 +153,9 @@ class OrderLine extends React.Component {
       <div className={styles.orderline}>
         <div className={styles.title}>订单管理</div>
         <div className={styles.btns}>
-          <Button>添加</Button> &nbsp;
-          <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+            <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
+            <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
+            <Button type="link">导出</Button>
         </div>
         <Table 
           bordered
@@ -126,8 +165,13 @@ class OrderLine extends React.Component {
           rowSelection={rowSelection}
           columns={columns}
           dataSource={this.state.list}/>
-
-      </div>
+         <OrderLineForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}/>
+        </div>
+      
     )
   }
 }
