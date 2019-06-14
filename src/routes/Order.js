@@ -157,7 +157,7 @@ class Order extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.order}>
-        <div className={styles.title}>订单显示</div>
+        <div className={styles.title}>订单管理</div>
         <div className={styles.btns}>
         <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
             <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
