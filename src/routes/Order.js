@@ -4,8 +4,8 @@ import styles from './Order.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
-
-// 组件类必须要继承React.Component，是一个模块，顾客管理子功能
+import OrderForm from './OrderForm'
+// 组件类必须要继承React.Component，是一个模块，订单显示子功能
 class Order extends React.Component {
   // 局部状态state
   constructor(){
@@ -13,7 +13,8 @@ class Order extends React.Component {
     this.state = {
       ids:[], // 批量删除的时候保存的id
       list:[],
-      loading:false
+      loading:false,
+      visible:false
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -24,7 +25,7 @@ class Order extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/comment/findAll")
+    axios.get("/order/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -39,7 +40,7 @@ class Order extends React.Component {
       title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
-        axios.post("/comment/batchDelete",{ids:this.state.ids})
+        axios.post("/order/batchDelete",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
@@ -56,7 +57,7 @@ class Order extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         // 删除操作
-        axios.get("/comment/deleteById",{
+        axios.get("/order/deleteById",{
           params:{
             id:id
           }
@@ -69,20 +70,52 @@ class Order extends React.Component {
       }
     });
   }
+   // 取消按钮的事件处理函数
+   handleCancel = () => {
+    this.setState({ visible: false });
+  };
+  // 确认按钮的事件处理函数
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      // 表单校验完成后与后台通信进行保存
+      axios.post("/order/saveOrUpdate",values)
+      .then((result)=>{
+        message.success(result.statusText)
+        // 重置表单
+        form.resetFields();
+        // 关闭模态框
+        this.setState({ visible: false });
+        this.reloadData();
+      })
+      
+    });
+  };
+  // 将子组件的引用在父组件中进行保存，方便后期调用
+  saveFormRef = formRef => {
+    this.formRef = formRef;
+  };
+  // 去添加
+  toAdd(){
+    this.setState({ visible:true})
+  }
+  // 去更新
+  toEdit(record){
+    alert(JSON.stringify(record));
+    // 将record值绑定表单中
+    this.setState({visible:true})
+  }
 
   // 组件类务必要重写的方法，表示页面渲染
   render(){
     // 变量定义
     let columns = [{
-      title:'订单号',
-      dataIndex:'id'
-    },{
-      title:'订单时间',
-      dataIndex:'order_time'
-    },{
-        title:'总量',
+      title:'总量',
         dataIndex:'total'
-      },{
+    },{
         title:'顾客号',
         dataIndex:'customer_id'
       },{
@@ -93,15 +126,18 @@ class Order extends React.Component {
         title:'地址号',
         dataIndex:'address_id'
       },{
+        title:'订单时间',
+        dataIndex:'order_time'
+      },{
       title:'操作',
       width:120,
       align:"center",
       render:(text,record)=>{
         return (
           <div>
-            <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
-            <Button type='link' size="small">修改</Button>
-          </div>
+          <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
+          <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
+        </div>
         )
       }
     }]
@@ -120,12 +156,12 @@ class Order extends React.Component {
     
     // 返回结果 jsx(js + xml)
     return (
-      <div className={styles.comment}>
+      <div className={styles.order}>
         <div className={styles.title}>订单显示</div>
         <div className={styles.btns}>
-          <Button>添加</Button> &nbsp;
-          <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+        <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
+            <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
+            <Button type="link">导出</Button>
         </div>
         <Table 
           bordered
@@ -136,7 +172,12 @@ class Order extends React.Component {
           columns={columns}
           dataSource={this.state.list}/>
 
-      </div>
+      <OrderForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}/>
+        </div>
     )
   }
 }
