@@ -41,11 +41,21 @@ class AddressForm extends React.Component {
                 rules: [{ required: true, message: '请输入电话!' }],
               })(<Input />)}
             </Form.Item>
-          
-           
           </Form>
         </Modal>
     );
   }
 }
-export default Form.create()(AddressForm);
+// 将通过props从父组件中获取的值拿出来设置到表单元素上
+const mapPropsToFields = (props)=>{
+  let obj = {};
+  for(let key in props.initData){
+    let val = props.initData[key];
+    obj[key] = Form.createFormField({value:val})
+  }
+  return obj;
+}
+
+export default Form.create({
+  mapPropsToFields
+})(AddressForm);

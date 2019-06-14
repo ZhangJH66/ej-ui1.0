@@ -16,7 +16,8 @@ class AddressPage extends React.Component {
       ids:[], // 批量删除的时候保存的id
       list:[],
       loading:false,
-      visible:false
+      visible:false,
+      address:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -102,11 +103,11 @@ class AddressPage extends React.Component {
     };
     // 去添加
     toAdd(){
-      this.setState({ visible:true})
+      this.setState({address:{},visible:true})
     }
     // 去更新
     toEdit(record){
-      alert(JSON.stringify(record));
+      this.setState({address:record})
       // 将record值绑定表单中
       this.setState({visible:true})
     }
@@ -175,6 +176,7 @@ class AddressPage extends React.Component {
             dataSource={this.state.list}/>
   
           <AddressForm
+            initData={this.state.address}
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
