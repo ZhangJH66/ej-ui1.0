@@ -2,7 +2,7 @@ import React from 'react';
 import {Form,Modal,Input,Radio} from 'antd'
 
 
-class CustomerForm extends React.Component {
+class WaiterForm extends React.Component {
 
   render(){
     const formLayout = {
@@ -18,9 +18,9 @@ class CustomerForm extends React.Component {
     // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
-    // 将表单中没有出现的值做一个双向数据绑定
+   // 将表单中没有出现的值做一个双向数据绑定
     getFieldDecorator("id");
-    getFieldDecorator("status");
+    getFieldDecorator("status" );
     getFieldDecorator("photo");
     getFieldDecorator("idcard");
     return (
@@ -65,4 +65,4 @@ const mapPropsToFields = (props)=>{
 
 export default Form.create({
   mapPropsToFields
-})(CustomerForm);
+})(WaiterForm);
