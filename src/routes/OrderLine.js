@@ -6,6 +6,7 @@ import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
 import OrderLineForm from './OrderLineForm'
 
+
 // 组件类必须要继承React.Component，是一个模块，订单显示子功能
 class OrderLine extends React.Component {
   // 局部状态state
@@ -15,7 +16,8 @@ class OrderLine extends React.Component {
       ids:[], // 批量删除的时候保存的id
       list:[],
       loading:false,
-      visible:false
+      visible:false,
+      orderLine:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -105,7 +107,7 @@ toAdd(){
 }
 // 去更新
 toEdit(record){
-  alert(JSON.stringify(record));
+  this.setState({orderLine:{},visible:true})
   // 将record值绑定表单中
   this.setState({visible:true})
 }
@@ -169,6 +171,7 @@ toEdit(record){
           columns={columns}
           dataSource={this.state.list}/>
          <OrderLineForm
+            initData={this.state.orderLine}
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
