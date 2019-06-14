@@ -114,6 +114,9 @@ toEdit(record){
   render(){
     // 变量定义
     let columns = [{
+      title:'编号',
+      dataIndex:'id'
+    },{
         title:'订单号',
         dataIndex:'order_id'
       },{

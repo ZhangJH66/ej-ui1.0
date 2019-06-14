@@ -120,6 +120,9 @@ class CommentPage extends React.Component {
   render(){
     // 变量定义
     let columns = [{
+      title:'编号',
+      dataIndex:'id'
+    },{
       title:'评论内容',
       dataIndex:'content'
     },{

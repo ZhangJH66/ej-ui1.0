@@ -29,7 +29,7 @@ function RouterConfig({ history }) {
                 <li className={styles["nav-list-item"]}><Link to="/orderline">订单项管理</Link></li>
               </ul>
           </div>
-        <div className="right-content">
+          <div className={styles["right-content"]}>
         <Switch>
         <Route path="/" exact component={IndexPage} />
         <Route path="/customer" exact component={CustomerPage} />

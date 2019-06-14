@@ -120,6 +120,9 @@ toEdit(record){
   render(){
     // 变量定义
     let columns = [{
+      title:'商品编号',
+      dataIndex:'id'
+    },{
       title:'商品名称',
       dataIndex:'name'
     },{

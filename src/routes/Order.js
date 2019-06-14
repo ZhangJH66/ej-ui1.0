@@ -113,6 +113,9 @@ class Order extends React.Component {
   render(){
     // 变量定义
     let columns = [{
+      title:'编号',
+      dataIndex:'id'
+    },{
       title:'总量',
         dataIndex:'total'
     },{

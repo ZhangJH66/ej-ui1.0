@@ -119,6 +119,9 @@ class CategoryPage extends React.Component {
   render(){
     // 变量定义
     let columns = [{
+      title:'编号',
+      dataIndex:'id'
+    },{
       title:'姓名',
       dataIndex:'name'
     },{
