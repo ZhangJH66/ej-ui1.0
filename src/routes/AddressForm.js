@@ -7,6 +7,8 @@ class AddressForm extends React.Component {
     // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
+    getFieldDecorator("id");
+    getFieldDecorator("coustomer_id");
     return (
       <Modal
           visible={visible}
