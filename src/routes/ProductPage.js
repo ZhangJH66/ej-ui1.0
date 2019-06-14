@@ -145,7 +145,7 @@ toEdit(record){
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
-            <Button type='link' size="small">修改</Button>
+            <Button type='link' size="small"  onClick={this.toEdit.bind(this,record)}>修改</Button>
           </div>
         )
       }

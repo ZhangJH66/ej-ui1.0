@@ -9,18 +9,20 @@ import AddressPage from './routes/AddressPage'
 import CommentPage from './routes/CommentPage'
 import Order from './routes/Order'
 import OrderLine from './routes/OrderLine'
+import NormalLoginForm from './routes/LoginPage'
 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
         <Route path="/" exact component={IndexPage} />
+        <Route path="/login" exact component={NormalLoginForm} />
         <Route path="/customer" exact component={CustomerPage} />
         <Route path="/category" exact component={CategoryPage} />
         <Route path="/comment" exact component={CommentPage} />
         <Route path="/product" exact component={ProductPage} />
         <Route path="/waiter" exact component={WaiterPage} />
-       <Route path="/address" exact component={AddressPage} />
+        <Route path="/address" exact component={AddressPage} />
         <Route path="/order" exact component={Order} />
         <Route path="/orderline" exact component={OrderLine} />
       </Switch>
