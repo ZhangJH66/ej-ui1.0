@@ -136,7 +136,7 @@ toEdit(record){
         )
       }
     }]
-    const rowSelection = {
+    const rowSelection = { 
       onChange: (selectedRowKeys, selectedRows) => {
         // 当用户操作复选按钮的时候，将值获取到并且保存到state中
         this.setState({
