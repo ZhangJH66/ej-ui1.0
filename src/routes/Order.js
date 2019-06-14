@@ -4,7 +4,7 @@ import styles from './Order.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
-import OrderForm from '/.OrderForm'
+import OrderForm from './OrderForm'
 // 组件类必须要继承React.Component，是一个模块，订单显示子功能
 class Order extends React.Component {
   // 局部状态state
