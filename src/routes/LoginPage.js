@@ -61,3 +61,4 @@ const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(NormalLogin
 
 ReactDOM.render(<WrappedNormalLoginForm />, document.getElementById('container'));
         
+export default NormalLoginForm;
