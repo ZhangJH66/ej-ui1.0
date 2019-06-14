@@ -4,12 +4,20 @@ import {Form,Modal,Input} from 'antd'
 class OrderLineForm extends React.Component {
 
   render(){
+    const formLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
+    }
     // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
-    getFieldDecorator("id");
-    getFieldDecorator("product_id");
-    getFieldDecorator("order_id");
+  
     return (
       <Modal
           visible={visible}
@@ -19,6 +27,11 @@ class OrderLineForm extends React.Component {
           onOk={onCreate}
         >
           <Form layout="vertical">
+          <Form.Item label="订单ID">
+              {getFieldDecorator('id', {
+                rules: [{ required: true, message: '请输入订单数量!' }],
+              })(<Input />)}
+            </Form.Item>
             <Form.Item label="订单数量">
               {getFieldDecorator('number', {
                 rules: [{ required: true, message: '请输入订单数量!' }],

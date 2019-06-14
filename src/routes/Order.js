@@ -101,11 +101,11 @@ class Order extends React.Component {
   };
   // 去添加
   toAdd(){
-    this.setState({ visible:true})
+    this.setState({order:{},visible:true})
   }
   // 去更新
   toEdit(record){
-    this.setState({order:{},visible:true})
+    this.setState({order:record})
     // 将record值绑定表单中
     this.setState({visible:true})
   }

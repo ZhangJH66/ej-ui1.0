@@ -21,11 +21,12 @@ function RouterConfig({ history }) {
             </div>
               <ul>
                 <li className={styles["nav-list-item"]}><Link to="/customer">顾客管理</Link></li>
-                <li className={styles["nav-list-item"]}><Link to="/order">订单管理</Link></li>
                 <li className={styles["nav-list-item"]}><Link to="/category">分类管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/address">地址管理</Link></li>
                 <li className={styles["nav-list-item"]}><Link to="/comment">评论管理</Link></li>
                 <li className={styles["nav-list-item"]}><Link to="/product">服务管理</Link></li>
                 <li className={styles["nav-list-item"]}><Link to="/waiter">工人管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/order">订单管理</Link></li>
                 <li className={styles["nav-list-item"]}><Link to="/orderline">订单项管理</Link></li>
               </ul>
           </div>

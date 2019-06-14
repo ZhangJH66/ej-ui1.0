@@ -103,11 +103,11 @@ saveFormRef = formRef => {
 };
 // 去添加
 toAdd(){
-  this.setState({ visible:true})
+  this.setState({orderLine:{}, visible:true})
 }
 // 去更新
 toEdit(record){
-  this.setState({orderLine:{},visible:true})
+  this.setState({orderLine:record})
   // 将record值绑定表单中
   this.setState({visible:true})
 }
