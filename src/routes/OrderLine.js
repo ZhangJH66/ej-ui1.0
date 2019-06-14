@@ -6,7 +6,7 @@ import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
 import OrderLineForm from './OrderLineForm'
 
-// 组件类必须要继承React.Component，是一个模块，订单管理子功能
+// 组件类必须要继承React.Component，是一个模块，订单显示子功能
 class OrderLine extends React.Component {
   // 局部状态state
   constructor(){
@@ -154,7 +154,7 @@ toEdit(record){
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.orderline}>
-        <div className={styles.title}>订单管理</div>
+        <div className={styles.title}>订单显示</div>
         <div className={styles.btns}>
             <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
             <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;

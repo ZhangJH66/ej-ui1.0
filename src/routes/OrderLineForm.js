@@ -10,7 +10,7 @@ class OrderLineForm extends React.Component {
     return (
       <Modal
           visible={visible}
-          title="添加订单管理信息"
+          title="添加订单显示信息"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
