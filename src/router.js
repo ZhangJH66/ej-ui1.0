@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Switch } from 'dva/router';
+import { Router, Route, Switch ,Link} from 'dva/router';
 import IndexPage from './routes/IndexPage';
 import CustomerPage from './routes/CustomerPage'
 import CategoryPage from './routes/CategoryPage'
@@ -9,14 +9,29 @@ import AddressPage from './routes/AddressPage'
 import CommentPage from './routes/CommentPage'
 import Order from './routes/Order'
 import OrderLine from './routes/OrderLine'
-import NormalLoginForm from './routes/LoginPage'
+import styles from './router.css'
 
 function RouterConfig({ history }) {
   return (
     <Router history={history}>
-      <Switch>
+      <div className={styles.container}>
+          <div className={styles["left-nav"]}>
+            <div className={styles.title}>
+              E洁家政管理系统
+            </div>
+              <ul>
+                <li className={styles["nav-list-item"]}><Link to="/customer">顾客管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/order">订单管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/category">分类管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/comment">评论管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/product">服务管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/waiter">工人管理</Link></li>
+                <li className={styles["nav-list-item"]}><Link to="/orderline">订单项管理</Link></li>
+              </ul>
+          </div>
+        <div className="right-content">
+        <Switch>
         <Route path="/" exact component={IndexPage} />
-        <Route path="/login" exact component={NormalLoginForm} />
         <Route path="/customer" exact component={CustomerPage} />
         <Route path="/category" exact component={CategoryPage} />
         <Route path="/comment" exact component={CommentPage} />
@@ -25,7 +40,9 @@ function RouterConfig({ history }) {
         <Route path="/address" exact component={AddressPage} />
         <Route path="/order" exact component={Order} />
         <Route path="/orderline" exact component={OrderLine} />
-      </Switch>
+        </Switch>
+        </div>
+      </div>
     </Router>
   );
 }

@@ -156,12 +156,13 @@ class CustomerPage extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.customer}>
-        <div className={styles.title}>顾客管理</div>
+        <div className={styles.title}><h2 align = "center">顾客管理</h2></div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
           <Button type="link">导出</Button>
         </div>
+        
         <Table 
           bordered
           rowKey="id"

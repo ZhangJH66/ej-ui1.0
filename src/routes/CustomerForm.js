@@ -1,6 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input,Radio} from 'antd'
 
+import styles from './CustomerPage.css'
 class CustomerForm extends React.Component {
 
   render(){
@@ -29,7 +30,8 @@ class CustomerForm extends React.Component {
           onCancel={onCancel}
           onOk={onCreate}
         >
-          <Form layout="vertical" {...formLayout}>
+          
+          <Form layout="vertical" {...formLayout} className={styles.form}>
             <Form.Item label="姓名" >
               {getFieldDecorator('realname', {
                 rules: [{ required: true, message: '请输入姓名!' }],
