@@ -14,7 +14,8 @@ class Order extends React.Component {
       ids:[], // 批量删除的时候保存的id
       list:[],
       loading:false,
-      visible:false
+      visible:false,
+      order:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -100,11 +101,11 @@ class Order extends React.Component {
   };
   // 去添加
   toAdd(){
-    this.setState({ visible:true})
+    this.setState({order:{},visible:true})
   }
   // 去更新
   toEdit(record){
-    alert(JSON.stringify(record));
+    this.setState({order:record})
     // 将record值绑定表单中
     this.setState({visible:true})
   }
@@ -113,7 +114,7 @@ class Order extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'编号',
+      title:'订单号',
       dataIndex:'id'
     },{
       title:'总量',
@@ -176,6 +177,7 @@ class Order extends React.Component {
           dataSource={this.state.list}/>
 
       <OrderForm
+            initDate={this.state.order}
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
