@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form,Modal,Input,Radio} from 'antd'
+import {Form,Modal,Input} from 'antd'
 
 class OrderForm extends React.Component {
 
@@ -17,20 +17,18 @@ class OrderForm extends React.Component {
     // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
-   
-   
     return (
       <Modal
           visible={visible}
-          title="添加订单管理信息"
+          title="添加订单显示信息"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
         >
-          <Form layout="vertical">
+          <Form layout="vertical"{...formLayout}>
           <Form.Item label="订单ID">
               {getFieldDecorator('id', {
-                rules: [{ required: true, message: '请输入订单总量!' }],
+                rules: [{ required: true, message: '请输入订单ID!' }],
               })(<Input />)}
             </Form.Item>
             <Form.Item label="订单总量">
@@ -64,7 +62,7 @@ class OrderForm extends React.Component {
     );
   }
 }
-//将通过props从父组件中获取的值拿出来设置到表单元素上
+// 将通过props从父组件中获取的值拿出来设置到表单元素上
 const mapPropsToFields = (props)=>{
   let obj = {};
   for(let key in props.initData){
@@ -73,6 +71,7 @@ const mapPropsToFields = (props)=>{
   }
   return obj;
 }
+
 export default Form.create({
   mapPropsToFields
 })(OrderForm);

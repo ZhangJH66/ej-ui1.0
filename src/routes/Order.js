@@ -101,10 +101,11 @@ class Order extends React.Component {
   };
   // 去添加
   toAdd(){
-    this.setState({order:{},visible:true})
+    this.setState({ order:{},visible:true})
   }
   // 去更新
   toEdit(record){
+    // 更前先先把要更新的数据设置到state中
     this.setState({order:record})
     // 将record值绑定表单中
     this.setState({visible:true})
@@ -114,8 +115,8 @@ class Order extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'订单号',
-      dataIndex:'id'
+      title:'订单ID',
+        dataIndex:'id'
     },{
       title:'总量',
         dataIndex:'total'
@@ -161,7 +162,7 @@ class Order extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.order}>
-        <div className={styles.title}><h2 align = "center">订单管理</h2></div>
+        <div className={styles.title}>订单显示</div>
         <div className={styles.btns}>
         <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
             <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
@@ -177,7 +178,7 @@ class Order extends React.Component {
           dataSource={this.state.list}/>
 
       <OrderForm
-            initDate={this.state.order}
+        initData={this.state.order}
             wrappedComponentRef={this.saveFormRef}
             visible={this.state.visible}
             onCancel={this.handleCancel}
