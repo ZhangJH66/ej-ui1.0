@@ -161,7 +161,7 @@ class WaiterPage extends React.Component {
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.waiter}>
-        <div className={styles.title}>服务员管理</div>
+        <div className={styles.title}><h2 align = "center">服务员管理</h2></div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;

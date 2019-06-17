@@ -154,7 +154,7 @@ toEdit(record){
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.orderline}>
-        <div className={styles.title}>订单显示</div>
+        <div className={styles.title}><h2 align = "center">订单项管理</h2></div>
         <div className={styles.btns}>
             <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
             <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
