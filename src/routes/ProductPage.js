@@ -7,7 +7,7 @@ import axios from '../utils/axios'
 import ProductForm from './ProductForm'
 
 
-// 组件类必须要继承React.Component，是一个模块，顾客管理子功能
+// 组件类必须要继承React.Component，是一个模块，产品管理子功能
 class ProductPage extends React.Component {
   // 局部状态state
   constructor(){
@@ -15,7 +15,9 @@ class ProductPage extends React.Component {
     this.state = {
       ids:[], // 批量删除的时候保存的id
       list:[],
-      loading:false
+      loading:false,
+      visible:false,
+      product:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -38,7 +40,7 @@ class ProductPage extends React.Component {
   // 批量删除
   handleBatchDelete(){
     Modal.confirm({
-      title: '确定删除这条记录吗?',
+      title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
         axios.post("/product/batchDelete",{ids:this.state.ids})
@@ -71,84 +73,85 @@ class ProductPage extends React.Component {
       }
     });
   }
-
-
-// 取消按钮的事件处理函数
-handleCancel = () => {
-  this.setState({ visible: false });
-};
-// 确认按钮的事件处理函数
-handleCreate = () => {
-  const form = this.formRef.props.form;
-  form.validateFields((err, values) => {
-    if (err) {
-      return;
-    }
-    // 表单校验完成后与后台通信进行保存
-    axios.post("/product/saveOrUpdate",values)
-    .then((result)=>{
-      message.success(result.statusText)
-      // 重置表单
-      form.resetFields();
-      // 关闭模态框
-      this.setState({ visible: false });
-      this.reloadData();
-    })
-    
-  });
-};
-// 将子组件的引用在父组件中进行保存，方便后期调用
-saveFormRef = formRef => {
-  this.formRef = formRef;
-};
-// 去添加
-toAdd(){
-  // 将默认值置空,模态框打开
-  this.setState({product:{},visible:true})
-}
-// 去更新
-toEdit(record){
-  // 更前先先把要更新的数据设置到state中
-  this.setState({product:record})
-  // 将record值绑定表单中
-  this.setState({visible:true})
-}
-
-
+  // 取消按钮的事件处理函数
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+  // 确认按钮的事件处理函数
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      alert(JSON.stringify(values));
+      // 表单校验完成后与后台通信进行保存
+      axios.post("/product/saveOrUpdate",values)
+      .then((result)=>{
+        message.success(result.statusText)
+        // 重置表单
+        form.resetFields();
+        // 关闭模态框
+        this.setState({ visible: false });
+        this.reloadData();
+      })
+      
+    });
+  };
+  // 将子组件的引用在父组件中进行保存，方便后期调用
+  saveFormRef = formRef => {
+    this.formRef = formRef;
+  };
+  // 去添加
+  toAdd(){
+    // 将默认值置空,模态框打开
+    this.setState({product:{},visible:true})
+  }
+  // 去更新
+  toEdit(record){
+    // 更前先先把要更新的数据设置到state中
+    this.setState({product:record})
+    // 将record值绑定表单中
+    this.setState({visible:true})
+  }
+  toDetails(record){
+    console.log(record);
+    //跳转
+    this.props.history.push("/productDetails")
+  }
 
   // 组件类务必要重写的方法，表示页面渲染
   render(){
     // 变量定义
     let columns = [{
-      title:'商品编号',
-      dataIndex:'id'
-    },{
-      title:'商品名称',
+      title:'产品名称',
       dataIndex:'name'
     },{
-      title:'商品描述',
+      title:'描述',
       dataIndex:'description'
     },{
-      title:'商品价格',
+      title:'单价',
       align:"center",
       dataIndex:'price'
     },{
-      title:'商品状态',
+      title:'图片',
       align:"center",
-      dataIndex:'status'
-    },{
-      title:'商品图片',
-      align:"center",
-      dataIndex:'photo'
+      dataIndex:'photo',
+      render(text){
+        return (
+          <img width={40} height={40} src={"http://134.175.154.93:8888/group1/"+text}/>
+        )
+      }
     },{
       title:'操作',
-      width:120,
+      width:160,
       align:"center",
       render:(text,record)=>{
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
-            <Button type='link' size="small"  onClick={this.toEdit.bind(this,record)}>修改</Button>
+            <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
+            <Button type='link' size="small" onClick={this.toDetails.bind(this,record)}>详情</Button>
           </div>
         )
       }
@@ -169,7 +172,7 @@ toEdit(record){
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.product}>
-        <div className={styles.title}><h2 align = "center">商品管理</h2></div>
+        <div className={styles.title}>产品管理</div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
@@ -184,14 +187,12 @@ toEdit(record){
           columns={columns}
           dataSource={this.state.list}/>
 
-
         <ProductForm
           initData={this.state.product}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}/>
-
       </div>
     )
   }

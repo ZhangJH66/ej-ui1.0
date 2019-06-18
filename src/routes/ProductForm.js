@@ -1,9 +1,39 @@
 import React from 'react';
-import {Form,Modal,Input,Radio} from 'antd'
+import {
+  message,
+  Upload,
+  Button,
+  Icon,
+  Form,
+  Modal,
+  Input,
+  Select
+} from 'antd'
+
+import axios from '../utils/axios'
 
 class ProductForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      categories:[]
+    }
+  }
+  //加载栏目信息
+  loadCategories(){
+    axios.get("/category/findAll")
+    .then((result)=>{
+      this.setState({categories:result.data})
+    })
+  }
+  componentDidMount(){
+     //在渲染表单前查找到栏目信息
+     this.loadCategories();
+  }
 
   render(){
+   
+
     const formLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -17,34 +47,81 @@ class ProductForm extends React.Component {
     // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
+    // 定义上传组件的参数
+    const upload_props =  {
+      name: 'file',
+      action: 'http://134.175.154.93:8099/manager/file/upload',
+      onChange:(info)=> {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          //后端的回应信息
+          let result = info.file.response;
+          // 将上传成功后的图片id保存到表单中，点击提交的时候再随着表单提交提交到后台
+          if(result.status=== 200){
+            let photo = result.data.id;
+            // 自行将photo设置到表单中
+            this.props.form.setFieldsValue({
+              photo
+            });
+          } else {
+            message.error(result.message)
+          }
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
+
+
     // 将表单中没有出现的值做一个双向数据绑定
     getFieldDecorator("id");
     getFieldDecorator("status");
-    getFieldDecorator("phtot");
-    getFieldDecorator("category_id");
+    getFieldDecorator("photo");
     return (
       <Modal
           visible={visible}
-          title="添加商品"
+          title="添加产品信息"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
         >
           <Form layout="vertical" {...formLayout}>
-            <Form.Item label="商品名称" >
+            <Form.Item label="产品名称" >
               {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入商品名称!' }],
+                rules: [{ required: true, message: '请输入产品名称!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="商品描述" >
+            <Form.Item label="描述信息" >
               {getFieldDecorator('description', {
-                rules: [{ required: true, message: '请输入商品描述!' }],
+                rules: [{ required: true, message: '请输入描述信息!' }],
+              })(<Input.TextArea />)}
+            </Form.Item>
+            <Form.Item label="单价">
+              {getFieldDecorator('price', {
+                rules: [{ required: true, message: '请输入密码!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="商品价格">
-              {getFieldDecorator('price', {
-                rules: [{ required: true, message: '请输入商品价格!' }],
-              })(<Input />)}
+            <Form.Item label="所属分类">
+              {getFieldDecorator('categoryId', {
+                rules: [{ required: true, message: '请输入密码!' }],
+              })(
+              <Select>
+                {
+                  this.state.categories.map((item)=>{
+                    return <Select.Option value={item.id}>{item.name}</Select.Option>
+                  })
+                }
+              </Select>
+              )}
+            </Form.Item>
+            <Form.Item label="产品图片">
+              <Upload {...upload_props}>
+                <Button>
+                  <Icon type="upload" /> Click to Upload
+                </Button>
+              </Upload>
             </Form.Item>
            
           </Form>
